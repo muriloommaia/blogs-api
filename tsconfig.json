@@ -13,6 +13,6 @@
 //     "src"
 // , "database", "config"  ],
   "exclude": [
-    "dist", "node_modules", "tests"
+    "dist", "node_modules", "test"
   ]
 }

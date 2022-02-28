@@ -1,3 +1,11 @@
-export const start = (): string => 'Hello Typescript'
+import express from 'express'
+import db from './Sequelize/models'
 
-console.log(start())
+const app = express();
+const port = process.env.PORT || 3000;
+
+db.sequelize.sync().then(() => {
+  app.listen(port, () => {
+    console.log(`App listening on port ${port}`)
+  })
+})

@@ -4,3 +4,10 @@ export type UserAttributes = {
   password: string,
   email:string
 };
+
+export type PostAtributes = {
+  id: number,
+  title: string,
+  content: string,
+  userId:number
+};

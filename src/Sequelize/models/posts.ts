@@ -2,16 +2,15 @@
 import {
   Model
 } from 'sequelize'
-import { UserAttributes } from '../../interfaces'
-
-
+import { PostAtributes } from '../../interfaces'
 module.exports = (sequelize, DataTypes) => {
-  class Users extends Model<UserAttributes>
-  implements UserAttributes {
+  class Posts extends Model<PostAtributes> 
+  implements PostAtributes {
+    idUser: number
     id!: number;
-    email!: string;
-    userName!: string;
-    password!: string;
+    title!: string;
+    content!: string;
+    userId!: number;
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -19,34 +18,35 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Users.hasMany(models.Posts, {
-        foreignKey: 'userId' as 'UserPosts'
-      })
+      Posts.belongsTo(models.User, 
+        {
+          foreignKey: 'userId',
+          as: 'user'
+        })
     }
   }
-  Users.init({
+  Posts.init({
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       allowNull: false,
       autoIncrement: true,
     },
-    userName: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
+    content: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    password: {
-      type: DataTypes.STRING,
+    userId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-    },
+    }
   }, {
     sequelize,
-    modelName: 'User',
-    tableName: 'Users'
+    modelName: 'Posts',
   });
-  return Users;
+  return Posts;
 };

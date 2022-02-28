@@ -4,14 +4,15 @@
     "module": "commonjs",
     "target": "es2020",
     "esModuleInterop": true,
+    "allowJs": true,
     "sourceMap": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": [
-    "src"
-  ],
+//   "include": [
+//     "src"
+// , "database", "config"  ],
   "exclude": [
-    "dist"
+    "dist", "node_modules", "tests"
   ]
 }

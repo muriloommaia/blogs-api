@@ -1,7 +1,6 @@
 export type UserAttributes = {
   id: number,
   userName: string,
-  password: string,
   email:string
 };
 
@@ -17,4 +16,9 @@ export type PostAttributes = {
 export type CategoryAttributes = {
   id: number,
   name: string
+}
+
+export type PasswordAttributes = {
+  userId: number,
+  password: string,
 }

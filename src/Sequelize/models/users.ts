@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
     id!: number;
     email!: string;
     userName!: string;
-    password!: string;
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -19,6 +18,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Users.hasOne(models.Password, {
+        foreignKey: 'userId'
+      })
       Users.hasMany(models.Posts, {
         foreignKey: 'userId' as 'UserPosts'
       })
@@ -38,11 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    }
   }, {
     sequelize,
     modelName: 'User',

@@ -1,16 +1,19 @@
 'use strict';
+
 import {
   Model
 } from 'sequelize'
-import { PostAtributes } from '../../interfaces'
+import { PostAttributes } from '../../interfaces'
 module.exports = (sequelize, DataTypes) => {
-  class Posts extends Model<PostAtributes> 
-  implements PostAtributes {
+  class Posts extends Model<PostAttributes> 
+  implements PostAttributes {
     idUser: number
     id!: number;
     title!: string;
+    book!: string;
     content!: string;
     userId!: number;
+    versicle!: string;
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -18,6 +21,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Posts.belongsToMany(models.Category, {
+        through: 'PostCategories'
+      })
       Posts.belongsTo(models.User, 
         {
           foreignKey: 'userId',
@@ -36,6 +42,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    versicle: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    book: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     content: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -47,6 +61,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Posts',
+    tableName: 'Posts'
   });
   return Posts;
 };

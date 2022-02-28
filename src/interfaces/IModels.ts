@@ -5,9 +5,16 @@ export type UserAttributes = {
   email:string
 };
 
-export type PostAtributes = {
+export type PostAttributes = {
   id: number,
   title: string,
+  versicle: string,
   content: string,
-  userId:number
+  book: string,
+  userId: number
 };
+
+export type CategoryAttributes = {
+  id: number,
+  name: string
+}

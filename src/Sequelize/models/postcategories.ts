@@ -2,12 +2,13 @@
 import {
   Model
 } from 'sequelize'
-import { PasswordAttributes } from '../../interfaces'
+import { PostCategoriesAttributes } from '../../interfaces/'
+
 module.exports = (sequelize, DataTypes) => {
-  class Password extends Model<PasswordAttributes>
-  implements PasswordAttributes {
-    userId!: number
-    password!: string
+  class PostCategories extends Model<PostCategoriesAttributes>
+  implements PostCategoriesAttributes {
+    CategoryId: number
+    PostId: number
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -17,23 +18,28 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Password.init({
-    userId: {
+  PostCategories.init({
+    CategoryId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'Users',
+        model: 'Category',
         key: 'id'
       }
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
+    PostId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'Posts',
+        key: 'id'
+      }
     }
   }, {
     sequelize,
-    modelName: 'Password',
+    modelName: 'PostCategories',
   });
-  return Password;
+  return PostCategories;
 };

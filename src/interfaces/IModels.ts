@@ -22,3 +22,8 @@ export type PasswordAttributes = {
   userId: number,
   password: string,
 }
+
+export type PostCategoriesAttributes = {
+  CategoryId: number,
+  PostId: number
+}
